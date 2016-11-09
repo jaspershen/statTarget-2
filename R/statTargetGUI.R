@@ -147,13 +147,13 @@ statTargetGUI <- function() {
   lyout<-gWidgets2::glayout(container=shiftco_win)
   #font(lyout) <- list(background = "grey90")
   lyout[1,1]<-gWidgets2::gbutton("NA.Filter",cont=lyout)
-  lyout[1,2]<-(widgets$Frule<-gWidgets2::gedit("0.8",cont=lyout))
+  lyout[1,2]<-(widgets$Frule1<-gWidgets2::gedit("0.8",cont=lyout))
   lyout[2,1]<-gWidgets2::gbutton("QC span",cont=lyout)
   lyout[2,2]<-(widgets$QCspan<-gWidgets2::gedit("0",cont=lyout))
   lyout[3,1]<-gWidgets2::gbutton("Degree",cont=lyout)
   lyout[3,2]<-(widgets$degree<-gWidgets2::gcombobox(c("2","1","0"),cont=lyout))
   lyout[4,1]<-gWidgets2::gbutton("Imputation",cont=lyout)
-  lyout[4,2]<-(widgets$imputeM<-gWidgets2::gcombobox(c("KNN","min","median"),
+  lyout[4,2]<-(widgets$imputeM1<-gWidgets2::gcombobox(c("KNN","min","median"),
                                                      cont=lyout))
   button.group <- gWidgets2::ggroup(container = shiftco_win)
   ## Push buttons to right
@@ -162,22 +162,22 @@ statTargetGUI <- function() {
     #close.cur.dev()
     samPeno = gWidgets2::svalue(widgets$pheno)
     samFile = gWidgets2::svalue(widgets$profile)
-    Frule = gWidgets2::svalue(widgets$Frule)
-    Frule = as.numeric(Frule)
+    Frule1 = gWidgets2::svalue(widgets$Frule1)
+    Frule1 = as.numeric(Frule1)
     QCspan = gWidgets2::svalue(widgets$QCspan)
     QCspan = as.numeric(QCspan) 
     degree = gWidgets2::svalue(widgets$degree)
     degree = as.numeric(degree) 
-    imputeM = gWidgets2::svalue(widgets$imputeM)
-    shiftCor(samPeno,samFile,Frule = Frule, QCspan = QCspan, degree = degree,
-             imputeM = imputeM)
+    imputeM1 = gWidgets2::svalue(widgets$imputeM1)
+    shiftCor(samPeno,samFile,Frule = Frule1, QCspan = QCspan, degree = degree,
+             imputeM = imputeM1)
     gWidgets2::svalue(sb) <- "Shift Correction Finished!"}, 
     container=button.group)
   
   lyout<-gWidgets2::glayout(container=stat_win)
   
   lyout[2,1]<-gWidgets2::gbutton("Imputation", cont=lyout)
-  lyout[2,2]<-(widgets$imputeM<-gWidgets2::gcombobox(c("KNN","min","median"),
+  lyout[2,2]<-(widgets$imputeM2<-gWidgets2::gcombobox(c("KNN","min","median"),
                                                      cont=lyout))
   lyout[3,1]<-gWidgets2::gbutton("Glog", cont=lyout)
   lyout[3,2]<-(widgets$Glog<-gWidgets2::gcombobox(c("TRUE","FALSE"),
@@ -190,7 +190,7 @@ statTargetGUI <- function() {
   lyout[5,2]<-(widgets$multiTest<-
                  gWidgets2::gcombobox(c("TRUE","FALSE"),cont=lyout))
   lyout[1,1]<-gWidgets2::gbutton("NA.Filter", cont=lyout)
-  lyout[1,2]<-(widgets$Frule<-
+  lyout[1,2]<-(widgets$Frule2<-
                  gWidgets2::gedit("0.8", width = 10,cont=lyout))
   #lyout[1,4]<-gWidgets2::gbutton("(( _ _ ))..zzzZZ",width = 8, cont=lyout)
   lyout[1,3]<-gWidgets2::gbutton("Permutation times", cont=lyout)
@@ -230,9 +230,9 @@ statTargetGUI <- function() {
   gWidgets2::gbutton("Run", handler=function(h,...){
     #close.cur.dev()
     file = gWidgets2::svalue(widgets$stat)
-    Frule = gWidgets2::svalue(widgets$Frule)
-    Frule = as.numeric(Frule)
-    imputeM = gWidgets2::svalue(widgets$imputeM)
+    Frule2 = gWidgets2::svalue(widgets$Frule2)
+    Frule2 = as.numeric(Frule2)
+    imputeM2 = gWidgets2::svalue(widgets$imputeM2)
     glog = gWidgets2::svalue(widgets$Glog)
     test.multi = gWidgets2::svalue(widgets$multiTest)
     nvarRF = gWidgets2::svalue(widgets$nvarRF)
@@ -254,8 +254,8 @@ statTargetGUI <- function() {
     lower.lim = as.numeric(lower.lim)
     sig.lim = gWidgets2::svalue(widgets$pvalue)
     sig.lim = as.numeric(sig.lim)
-    statAnalysis(file=file, Frule = Frule,
-                 imputeM = imputeM,glog=glog, test.multi=test.multi, 
+    statAnalysis(file=file, Frule = Frule2,
+                 imputeM = imputeM2,glog=glog, test.multi=test.multi, 
                  FDR = FDR,nvarRF =nvarRF, scaling =scaling,silt = silt, 
                  pcax = pcax, pcay = pcay,Labels = Labels,
                  upper.lim = upper.lim, lower.lim= lower.lim, sig.lim=sig.lim)
@@ -264,4 +264,3 @@ statTargetGUI <- function() {
      Quit <- gWidgets2::gbutton("Quit",container=gp,handler = function(h,...) {
        gWidgets2::dispose(win)})
 }
-

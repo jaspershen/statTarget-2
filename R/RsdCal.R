@@ -22,7 +22,7 @@ RsdCal = function(file,batch = TRUE, DistPattern = TRUE, output= TRUE){
       fin = matrix(rep(NA, ncol(sorted)), nrow = 1)
       for (j in 1:nrow(sorted)) {
         if (sorted[j, 1] == i) {
-          vuota <- matrix(sorted[j, ], nrow = 1)
+          vuota <- as.matrix(sorted[j, ], nrow = 1)
           rownames(vuota) = rownames(sorted)[j]
           fin = rbind(fin, vuota)
         }
